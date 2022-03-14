@@ -1,0 +1,90 @@
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+
+public class Prueba {
+    
+    public static void main (String[] args) {
+        Colacircular cola = new Colacircular ();
+        int opcion = 0, elemento;
+        boolean asiento=false;
+        do {
+            try { 
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
+                "1. Alumno abordo autobus\n"
+                +"2. Alumno decendio (lugar disponible)\n"
+                +"3. Mostrar Pasajeros\n"
+                +"4. Salir\n"
+                +"\n        Que accion va a realizar?",
+            "MENU AUTOBUS UMG", JOptionPane.QUESTION_MESSAGE));
+                
+            switch (opcion){
+               
+               case 1:
+                    elemento = Integer.parseInt(JOptionPane.showInputDialog(null,
+                    "Ingrese el Carnè del Alumno",
+                    "\nAgregando Alumno al asiento disponible", JOptionPane.INFORMATION_MESSAGE));
+                    cola.insertar(elemento);
+                    break;
+               
+                    
+               case 2:
+                   if(!cola.Colacircularvacia()){
+                   elemento = Integer.parseInt(JOptionPane.showInputDialog(null,
+                    "Ingrese el Carnè del Alumno que bajo del autobus",
+                    "\nHabilitando asiento", JOptionPane.INFORMATION_MESSAGE));
+                    asiento=cola.eliminar(elemento);
+                    if(asiento){
+                        JOptionPane.showMessageDialog(null, "Descendio del autobus el alumno " +elemento,
+                      "ASIENTO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "El No. de Carne no existe",
+                      "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Aun no hay pasajeros abordo",
+                      "LISTA DE PASAJEROS", JOptionPane.ERROR_MESSAGE);    
+                      
+                       }
+                        
+                   break;
+                   
+               case 3:
+                     if (!cola.Colacircularvacia()){
+                      cola.Imprimircolacircular(); 
+                   }else{
+                      JOptionPane.showMessageDialog(null, "No hay pasajeros a bordo",
+                      "PASAJEROS ABORDO", JOptionPane.INFORMATION_MESSAGE);
+                    
+                     }
+                   
+                 break;
+                                     
+               case 4:
+                    JOptionPane.showMessageDialog(null, "Viaje Finalizado",
+                    "FIN DE LA RUTA", JOptionPane.WARNING_MESSAGE);
+                    
+                     break;
+                     
+               default: 
+                   
+                      JOptionPane.showMessageDialog(null, "La opcion no esta Disponible",
+                     "ERROR", JOptionPane.ERROR_MESSAGE);
+                      break;
+            } 
+                      
+            }catch (NumberFormatException n) {
+                   JOptionPane.showMessageDialog(null, "Error "+ n.getMessage());
+                  }
+            }
+            
+        while (opcion!=4);
+        }
+        }
+
+
+
+        
+
+    
