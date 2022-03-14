@@ -1,0 +1,73 @@
+import javax.swing.JOptionPane;
+
+
+public class Colacircular {
+    Nodo front;
+    Nodo back;
+    
+        public Colacircular() {front = back = null;}
+        
+        public boolean Colacircularvacia(){
+            if (front == back && front == null)
+                return true;
+            else 
+                return false;
+         }
+        
+       
+            
+        public Colacircular insertar (int elemento){
+            Nodo nuevo=new Nodo(elemento);
+            if(back!= null){
+                nuevo.siguiente=back.siguiente;
+                back.siguiente=nuevo;
+            }
+            back=nuevo;
+            return this;
+        }
+        
+        
+         public void Imprimircolacircular(){
+             Nodo auxiliar=back.siguiente;
+             String control="";
+             do{
+                 control=control + "Carnè "+ auxiliar.numero+ "\n";
+                 auxiliar=auxiliar.siguiente;
+             }while(auxiliar!=back.siguiente);
+             JOptionPane.showMessageDialog(null, "estos son los Pasajeros a bordo ",
+             "PASAJEROS ABORDO", JOptionPane.INFORMATION_MESSAGE);
+             JOptionPane.showMessageDialog(null, control,
+              "PASAJEROS ABORDO", JOptionPane.INFORMATION_MESSAGE);
+             }
+
+            
+        
+         public boolean eliminar (int elemento){
+             Nodo nuevo;
+             boolean buscador=false;
+             nuevo=back;
+             while(nuevo.siguiente!=back && !buscador){
+                 buscador=(nuevo.siguiente.numero==elemento);
+                 if(!buscador){
+                     nuevo=nuevo.siguiente;
+                 }
+             }
+             buscador=(nuevo.siguiente.numero==elemento);
+             if(buscador){
+                 Nodo auxiliar=nuevo.siguiente;
+                 if(back==back.siguiente){
+                 back=null;
+                 }else{
+                         if (auxiliar==back){
+                         back=nuevo;
+                         }
+                    nuevo.siguiente=auxiliar.siguiente;
+                         
+                         }
+                 auxiliar=null;
+             }
+             return buscador==true;
+         }
+             
+} 
+
